@@ -9,8 +9,6 @@ export class UserRepository extends Repository<UserEntity> {
 	}
 
 	async getUserEntityById(id: number) : Promise<UserEntity> {
-		console.log(id);
-
 		return await this.findOneBy({ id:id, });
 	}
 }

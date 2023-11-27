@@ -16,7 +16,7 @@ module.exports = {
     },
     ignorePatterns: [".eslintrc.js"],
     rules: {
-        "no-console": "error",
+        // "no-console": "error",
         "indent": ["error", "tab", {"SwitchCase": 1, "ignoredNodes": ["PropertyDefinition"]}], // 탭으로 분리(ide에서 4로 설정할 것), 데코레이터 이후의 노드는 무시
         "semi": ["error", "always"], // 세미콜론 사용
         "array-element-newline": ["error", {
