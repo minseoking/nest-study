@@ -10,10 +10,10 @@ import { validate, } from './config/env.validation';
 	imports: [
 		ConfigModule.forRoot({
 			isGlobal: true,
-			envFilePath:`.env.${process.env.NODE_ENV}`,
+			envFilePath:`${process.cwd()}/src/config/env/.env.${process.env.NODE_ENV}`,
 			validate,
 		}),
-		TypeOrmModule.forRoot(typeORMConfig),
+		TypeOrmModule.forRootAsync(typeORMConfig),
 		UsersModule,],
 })
 export class AppModule {
