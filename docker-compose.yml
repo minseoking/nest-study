@@ -1,4 +1,23 @@
+version: "3.8"
 services:
+  api:
+    container_name: nest-study
+    build:
+      dockerfile: Dockerfile
+      context: .
+#      target: prod
+    depends_on:
+      - mysql
+    links:
+      - mysql:mysql
+    volumes:
+      - ./:/app/
+    command:
+      - bash
+      - -c
+      - |
+        /app/wait-for-it.sh db:3306 -t 10
+         yarn run start:prod
   mysql:
     platform: linux/x86_64 # m1 mac 이슈
     image: mysql:8.0
