@@ -12,6 +12,7 @@ services:
       - mysql:mysql
     volumes:
       - ./:/app/
+        /app/node_modules
     command:
       - bash
       - -c
