@@ -1,8 +1,8 @@
 export interface User {
-    id : string,
+    id: string,
     title: string,
     description: string,
-    status :UserStatus,
+    status: UserStatus,
 }
 
 export enum UserStatus {

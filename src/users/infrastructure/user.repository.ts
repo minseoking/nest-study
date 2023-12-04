@@ -1,6 +1,6 @@
-import { DataSource, Repository, } from 'typeorm';
-import { UserEntity, } from '../domain/user.entity';
-import { Injectable, } from '@nestjs/common';
+import { DataSource, Repository } from 'typeorm';
+import { UserEntity } from '../domain/user.entity';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class UserRepository extends Repository<UserEntity> {
@@ -8,7 +8,7 @@ export class UserRepository extends Repository<UserEntity> {
 		super(UserEntity, dataSource.createEntityManager());
 	}
 
-	async getUserEntityById(id: number) : Promise<UserEntity> {
-		return await this.findOneBy({ id:id, });
+	async getUserEntityById(id: number): Promise<UserEntity> {
+		return await this.findOneBy({ id: id });
 	}
 }
