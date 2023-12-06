@@ -1,27 +1,25 @@
 import {
 	ForbiddenException, HttpStatus, Injectable
 } from '@nestjs/common';
-import { User } from '../persistence/users.model';
 import { UserRepository } from '../infrastructure/user.repository';
 import { UserEntity } from '../domain/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
-export class UsersService {
+export class UserService {
+
 	constructor(
         @InjectRepository(UserRepository)
         private userRepository: UserRepository
 	) {
 	}
 
-    private users: User[] = [];
+	async getAllUsers(): Promise<UserEntity[]> {
+    	return await this.userRepository.find();
+	}
 
-    getAllUsers(): User[] {
-    	return this.users;
-    }
-
-    async getUserById(id: number): Promise<UserEntity> {
+	async getUserById(id: number): Promise<UserEntity> {
     	const found = await this.userRepository.getUserEntityById(id);
     	if (!found) {
     		console.log(found);
@@ -29,9 +27,9 @@ export class UsersService {
     	}
 
     	return found;
-    }
+	}
 
-    async createUser(createUserDto: CreateUserDto): Promise<any> {
+	async createUser(createUserDto: CreateUserDto): Promise<any> {
     	const user = await this.userRepository.findOneBy({ userId: createUserDto.userId });
     	if (user) {
     		throw new ForbiddenException({
@@ -44,5 +42,9 @@ export class UsersService {
     	this.userRepository.save(createUserDto);
 
     	return result;
-    }
+	}
+
+	async deleteUser(id: number) {
+    	await this.userRepository.delete({ id:id });
+	}
 }
